@@ -1,0 +1,16 @@
+{
+  "item.faithfulmace.mace": "Mace",
+  "item.faithfulmace.wind_charge": "Wind Charge",
+
+  "entity.faithfulmace.wind_charge": "Wind Charge",
+
+  "subtitles.faithfulmace.item.mace.smash_air": "Mace smashes",
+  "subtitles.faithfulmace.item.mace.smash_ground": "Mace smashes",
+
+  "subtitles.faithfulmace.entity.wind_charge.throw": "Wind Charge flies",
+  "subtitles.faithfulmace.entity.wind_charge.wind_burst": "Wind Charge bursts",
+
+  "enchantment.faithfulmace.density": "Density",
+  "enchantment.faithfulmace.breach": "Breach",
+  "enchantment.faithfulmace.wind_burst": "Wind Burst"
+}

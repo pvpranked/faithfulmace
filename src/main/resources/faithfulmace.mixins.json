@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.pvpranked.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "DamageUtilBreachMixin",
+    "ExplosionLogging2Mixin",
+    "ExplosionLoggingMixin",
+    "PlayerEntityInterfaceMixin",
+    "ServerPlayerParticleMixin",
+    "WindChargeExplosionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

@@ -1,0 +1,51 @@
+{
+  "item.mace.smash_air": {
+    "sounds": [
+      "faithfulmace:item/mace/smash_air1",
+      "faithfulmace:item/mace/smash_air2",
+      "faithfulmace:item/mace/smash_air3"
+    ],
+    "subtitle": "subtitles.faithfulmace.item.mace.smash_air"
+  },
+  "item.mace.smash_ground": {
+    "sounds": [
+      "faithfulmace:item/mace/smash_ground1",
+      "faithfulmace:item/mace/smash_ground2",
+      "faithfulmace:item/mace/smash_ground3",
+      "faithfulmace:item/mace/smash_ground4"
+    ],
+    "subtitle": "subtitles.faithfulmace.item.mace.smash_ground"
+  },
+  "item.mace.smash_ground_heavy": {
+    "sounds": [
+      "faithfulmace:item/mace/smash_ground_heavy"
+    ],
+    "subtitle": "subtitles.faithfulmace.item.mace.smash_ground"
+  },
+  "entity.wind_charge.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.faithfulmace.entity.wind_charge.throw"
+  },
+  "entity.wind_charge.wind_burst": {
+    "sounds": [
+      {
+        "attenuation_distance": 8,
+        "name": "faithfulmace:entity/wind_charge/wind_burst1",
+        "pitch": 1.25
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "faithfulmace:entity/wind_charge/wind_burst2",
+        "pitch": 1.25
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "faithfulmace:entity/wind_charge/wind_burst3",
+        "pitch": 1.25
+      }
+    ],
+    "subtitle": "subtitles.faithfulmace.entity.wind_charge.wind_burst"
+  }
+}

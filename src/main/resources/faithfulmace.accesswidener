@@ -1,0 +1,28 @@
+accessWidener v2 named
+
+accessible method net/minecraft/particle/ParticleTypes register (Ljava/lang/String;Z)Lnet/minecraft/particle/DefaultParticleType;
+accessible method net/minecraft/particle/ParticleTypes register (Ljava/lang/String;ZLnet/minecraft/particle/ParticleEffect$Factory;Ljava/util/function/Function;)Lnet/minecraft/particle/ParticleType;
+
+accessible method net/minecraft/data/client/Models item (Ljava/lang/String;[Lnet/minecraft/data/client/TextureKey;)Lnet/minecraft/data/client/Model;
+
+accessible method net/minecraft/entity/EntityType register (Ljava/lang/String;Lnet/minecraft/entity/EntityType$Builder;)Lnet/minecraft/entity/EntityType;
+accessible field net/minecraft/entity/EntityType$Builder dimensions Lnet/minecraft/entity/EntityDimensions;
+
+extendable method net/minecraft/entity/Entity setBoundingBox (Lnet/minecraft/util/math/Box;)V
+
+accessible class net/minecraft/client/particle/ParticleManager$SpriteAwareFactory
+
+accessible method net/minecraft/world/World getDestructionType (Lnet/minecraft/world/GameRules$Key;)Lnet/minecraft/world/explosion/Explosion$DestructionType;
+accessible field net/minecraft/world/explosion/Explosion destructionType Lnet/minecraft/world/explosion/Explosion$DestructionType;
+accessible field net/minecraft/world/explosion/Explosion power F
+accessible field net/minecraft/world/explosion/Explosion createFire Z
+accessible field net/minecraft/world/explosion/Explosion random Lnet/minecraft/util/math/random/Random;
+accessible method net/minecraft/world/explosion/Explosion tryMergeStack (Lit/unimi/dsi/fastutil/objects/ObjectArrayList;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/BlockPos;)V
+
+accessible class net/minecraft/client/render/RenderLayer$MultiPhaseParameters
+accessible class net/minecraft/client/render/RenderPhase$Texture
+accessible class net/minecraft/client/render/RenderPhase$OffsetTexturing
+
+accessible class net/minecraft/enchantment/EnchantmentHelper$Consumer
+
+accessible class net/minecraft/client/render/RenderPhase$ShaderProgram

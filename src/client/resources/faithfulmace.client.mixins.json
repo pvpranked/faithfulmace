@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.pvpranked.mixin.client",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "AllowNoParticleForWindChargeMixin",
+    "CustomParticleTypeFactoryMixin",
+    "MaceSmashWorldEventMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "MaceModelRegisterMixin"
+  ]
+}
