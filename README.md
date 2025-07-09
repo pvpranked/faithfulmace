@@ -1,4 +1,6 @@
-This is the source code for the Faithful Mace mod, "A fully combat accurate backport of the mace, its enchants, and the wind charge. Used for the PVP Ranked mod".
+This is the source code for the Faithful Mace mod! 
+
+This is a fully combat accurate backport of the mace, its enchants, and the wind charge, and is used for the [PVP Ranked](https://modrinth.com/mod/pvpranked) mod.
 
 The mod is available at https://modrinth.com/mod/faithful-mace!
 
