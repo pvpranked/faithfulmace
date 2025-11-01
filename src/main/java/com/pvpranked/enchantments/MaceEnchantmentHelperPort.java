@@ -64,7 +64,7 @@ public class MaceEnchantmentHelperPort {
 
     public static float getArmorEffectiveness(ServerWorld world, ItemStack stack, Entity user, DamageSource damageSource, float baseArmorEffectiveness) {
         try {
-            MOGGER.info("Calculating armor effectiveness when attacking item was {}", stack);
+            if(superfluousLogging()) MOGGER.info("Calculating armor effectiveness when attacking item was {}", stack);
             MutableFloat mutableFloat = new MutableFloat(baseArmorEffectiveness);
             forEachEnchantment(stack, (enchantment, level) -> {
                 if (enchantment instanceof EnchantmentSmashDamageInterface) {
