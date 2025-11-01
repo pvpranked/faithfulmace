@@ -26,9 +26,9 @@ public class WindChargeItem extends Item // implements ProjectileItem
         ItemStack itemStack = user.getStackInHand(hand);
         user.getItemCooldownManager().set(this, 10);
         if (!world.isClient) {
-            WindChargeEntity enderPearlEntity = WindChargeEntity.create(user, world, user.getPos().getX(), user.getEyePos().getY(), user.getPos().getZ());
-            enderPearlEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, POWER, 1.0F);
-            world.spawnEntity(enderPearlEntity);
+            WindChargeEntity windChargeEntity = WindChargeEntity.create(user, world, user.getPos().getX(), user.getEyePos().getY(), user.getPos().getZ());
+            windChargeEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, POWER, 1.0F);
+            world.spawnEntity(windChargeEntity);
         }
 
         world.playSound(

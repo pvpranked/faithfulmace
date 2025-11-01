@@ -31,7 +31,7 @@ public abstract class PlayerEntityInterfaceMixin implements PlayerEntityMaceInte
 
 			DamageSource damageSource = (DamageSource) Optional.ofNullable(item.getDamageSource(thiscast)).orElse(thiscast.getDamageSources().playerAttack(thiscast));
 
-			float extra = ((MaceItem) itemStack.getItem()).getBonusAttackDamage(target, f.get(), damageSource);;
+			float extra = ((MaceItem) itemStack.getItem()).getBonusAttackDamage(target, f.get(), damageSource);
 
 			f.set(f.get() + extra);
 		}

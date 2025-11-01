@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.message.ParameterizedMessage;
 
 public class MaceUtil {
     public static void itemStackDamage(ItemStack itemStack, int amount, LivingEntity entity, EquipmentSlot slot) {
@@ -24,5 +25,9 @@ public class MaceUtil {
             });
         }
 
+    }
+
+    public static String format(String format, Object... args) {
+        return new ParameterizedMessage(format, args).getFormattedMessage();
     }
 }

@@ -1,6 +1,7 @@
 package com.pvpranked.enchantments;
 
 import com.pvpranked.EnchantmentSmashDamageInterface;
+import com.pvpranked.MaceUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -50,6 +51,7 @@ public class MaceEnchantmentHelperPort {
         Entity attacker = damageSource.getAttacker();
         ItemStack itemStack = attacker instanceof LivingEntity ? ((LivingEntity) attacker).getMainHandStack() : null;
         float i;
+        if(superfluousLogging()) MOGGER.info("Injecting mace damage alteration. Item that might be a mace: {}, attack victim: {}, attacker: {}", itemStack, armorWearer, damageSource.getAttacker());
         if (itemStack != null && armorWearer.getWorld() instanceof ServerWorld serverWorld) {
             i = MathHelper.clamp(MaceEnchantmentHelperPort.getArmorEffectiveness(serverWorld, itemStack, armorWearer, damageSource, h), 0.0F, 1.0F);
         } else {
@@ -62,16 +64,22 @@ public class MaceEnchantmentHelperPort {
 
     public static float getArmorEffectiveness(ServerWorld world, ItemStack stack, Entity user, DamageSource damageSource, float baseArmorEffectiveness) {
         try {
+            MOGGER.info("Calculating armor effectiveness when attacking item was {}", stack);
             MutableFloat mutableFloat = new MutableFloat(baseArmorEffectiveness);
             forEachEnchantment(stack, (enchantment, level) -> {
-                if (enchantment instanceof EnchantmentSmashDamageInterface)
+                if (enchantment instanceof EnchantmentSmashDamageInterface) {
                     enchantment.modifyArmorEffectiveness(world, level, stack, user, damageSource, mutableFloat);
+                } else {
+                    if(enchantment != null) {
+                        throw new IllegalStateException(MaceUtil.format("Encountered enchantment {} on item {} that doesn't extend EnchantmentSmashDamageInterface while calculating mace armor effectiveness diff, despite the injected interface into superclass {} (Enchantment.class)!", enchantment, stack, Enchantment.class));
+                    }
+                }
             });
             if(superfluousLogging()) MOGGER.info(mutableFloat.floatValue() + " effectiveness diff");
             return mutableFloat.floatValue();
         } catch (Exception e) {
-            MOGGER.error("Exception caught while calculating armor effectiveness with stack {} user {} baseValue {} enchantments {}: ", stack, user, baseArmorEffectiveness, stack.getEnchantments(), e);
-            return baseArmorEffectiveness;
+            MOGGER.error("Exception caught while FaithfulMace was calculating armor effectiveness with stack {} user {} baseValue {} enchantments {}: ", stack, user, baseArmorEffectiveness, stack.getEnchantments(), e);
+            throw e;
         }
     }
 
@@ -79,13 +87,18 @@ public class MaceEnchantmentHelperPort {
         try {
             MutableFloat mutableFloat = new MutableFloat(baseSmashDamagePerFallenBlock);
             forEachEnchantment((enchantment, level) -> {
-                if (enchantment instanceof EnchantmentSmashDamageInterface)
+                if (enchantment instanceof EnchantmentSmashDamageInterface) {
                     ((Enchantment) enchantment).modifySmashDamagePerFallenBlock(world, level, stack, target, damageSource, mutableFloat);
+                } else {
+                    if(enchantment != null) {
+                        throw new IllegalStateException(MaceUtil.format("Encountered enchantment {} on item {} that doesn't extend EnchantmentSmashDamageInterface while calculating mace smash damage per block, despite the injected interface into superclass {} (Enchantment.class)!", enchantment, stack, Enchantment.class));
+                    }
+                }
             }, stack);
             return mutableFloat.floatValue();
         } catch (Exception e) {
-            MOGGER.error("Exception caught while calculating extra base damage with stack {} target {} baseValue {} enchantments {}: ", stack, target, baseSmashDamagePerFallenBlock, stack.getEnchantments(), e);
-            return baseSmashDamagePerFallenBlock;
+            MOGGER.error("Exception caught while FaithfulMace was calculating extra base damage with stack {} target {} baseValue {} enchantments {}: ", stack, target, baseSmashDamagePerFallenBlock, stack.getEnchantments(), e);
+            throw e;
         }
     }
 
