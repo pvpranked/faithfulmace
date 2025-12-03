@@ -1,6 +1,5 @@
 package com.pvpranked.mixin;
 
-import com.pvpranked.PlayerEntityMaceInterface;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +11,7 @@ import static com.pvpranked.FaithfulMace.MOGGER;
 import static com.pvpranked.FaithfulMace.superfluousLogging;
 
 @Mixin(PlayerEntity.class)
-public abstract class ExplosionLogging2Mixin implements PlayerEntityMaceInterface {
+public abstract class ExplosionLogging2Mixin {
 
 
 	@Inject(method = "attack", at = @At(value = "HEAD"))

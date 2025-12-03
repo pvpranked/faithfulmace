@@ -3,7 +3,6 @@ package com.pvpranked.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.pvpranked.PlayerEntityMaceInterface;
 import com.pvpranked.enchantments.MaceEnchantmentHelperPort;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -12,7 +11,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LivingEntity.class)
-public abstract class DamageUtilBreachMixin implements PlayerEntityMaceInterface {
+public abstract class DamageUtilBreachMixin {
 
 	@Shadow public abstract boolean damage(DamageSource source, float amount);
 

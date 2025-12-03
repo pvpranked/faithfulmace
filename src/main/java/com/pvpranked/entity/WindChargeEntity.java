@@ -18,7 +18,7 @@ import net.minecraft.world.explosion.ExplosionBehavior;
 
 public class WindChargeEntity extends AbstractWindChargeEntity {
 
-    private static final ExplosionBehavior EXPLOSION_BEHAVIOR = new WindChargeNoDamageEntitiesExplosionBehavior(1.22F);
+    private static final ExplosionBehavior EXPLOSION_BEHAVIOR = new WindChargeNoDamageEntitiesCancelsFallDamageExplosionBehavior(1.22F);
     private static final float EXPLOSION_POWER = 1.2F;
     private static final float MAX_RENDER_DISTANCE_WHEN_NEWLY_SPAWNED = MathHelper.square(3.5F);
     private int deflectCooldown = 5;

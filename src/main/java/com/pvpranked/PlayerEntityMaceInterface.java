@@ -4,44 +4,58 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 
 public interface PlayerEntityMaceInterface {
-    default Vec3d currentExplosionImpactPos() {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
-        return null;
-    }
-    default void setCurrentExplosionImpactPos(Vec3d newVal) {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
+    default boolean hasLandedInFluid() {
+        throw getUnimplementedInterfaceError();
     }
 
-    default Entity explodedBy() {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
-        return null;
+    default void clearCurrentExplosion() {
+        throw getUnimplementedInterfaceError();
     }
+
+    default void tryClearCurrentExplosion() {
+        throw getUnimplementedInterfaceError();
+    }
+
+    default Vec3d currentExplosionImpactPos() {
+        throw getUnimplementedInterfaceError();
+    }
+
+    default void setCurrentExplosionImpactPos(Vec3d newVal) {
+        throw getUnimplementedInterfaceError();
+    }
+
+    /** set but never read as this is only for achievements */
+    default Entity explodedBy() {
+        throw getUnimplementedInterfaceError();
+    }
+    /** set but never read as this is only for achievements */
     default void setExplodedBy(Entity newVal) {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
+        throw getUnimplementedInterfaceError();
     }
 
     default boolean ignoreFallDamageFromCurrentExplosion() {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
-        return false;
+        throw getUnimplementedInterfaceError();
     }
     default void setIgnoreFallDamageFromCurrentExplosion(boolean newVal) {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
+        throw getUnimplementedInterfaceError();
     }
 
     default int currentExplosionResetGraceTime() {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
-        return 0;
+        throw getUnimplementedInterfaceError();
     }
     default void setCurrentExplosionResetGraceTime(int newVal) {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
+        throw getUnimplementedInterfaceError();
     }
 
     default void setSpawnExtraParticlesOnFall(boolean newVal) {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
+        throw getUnimplementedInterfaceError();
     }
 
     default boolean spawnExtraParticlesOnFall() {
-        new Exception("Default method for PlayerEntityMaceInterface should never run").printStackTrace();
-        return false;
+        throw getUnimplementedInterfaceError();
+    }
+
+    static RuntimeException getUnimplementedInterfaceError() {
+        return new RuntimeException("Default method for PlayerEntityMaceInterface should never run");
     }
 }

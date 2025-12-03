@@ -3,12 +3,18 @@
   "package": "com.pvpranked.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ChorusFruitClearCurrentExplosionMixin",
     "DamageUtilBreachMixin",
     "EnchantmentSmashDamageInterfaceMixin",
+    "EnderPearlsClearCurrentExplosionMixin",
     "ExplosionLogging2Mixin",
     "ExplosionLoggingMixin",
+    "PlayerEntityAddMaceDamageMixin",
+    "PlayerEntityClearCurrentExplosionMixin",
     "PlayerEntityInterfaceMixin",
     "ServerPlayerParticleMixin",
+    "ServerPlayInteractionManagerChangeGamemodeClearCurrentExplosionMixin",
+    "ServerPlayNetworkHandlerClearCurrentExplosionMixin",
     "WindChargeExplosionMixin"
   ],
   "injectors": {

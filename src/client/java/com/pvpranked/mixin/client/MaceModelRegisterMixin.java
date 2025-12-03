@@ -2,7 +2,6 @@ package com.pvpranked.mixin.client;
 
 import com.pvpranked.FaithfulMace;
 import com.pvpranked.item.ModItems;
-import com.pvpranked.PlayerEntityMaceInterface;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Model;
 import net.minecraft.item.Item;
@@ -13,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemModelGenerator.class)
-public abstract class MaceModelRegisterMixin implements PlayerEntityMaceInterface {
+public abstract class MaceModelRegisterMixin {
 
 	@Shadow public abstract void register(Item item, Model model);
 

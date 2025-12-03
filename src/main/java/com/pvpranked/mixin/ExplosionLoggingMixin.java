@@ -3,9 +3,8 @@ package com.pvpranked.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.pvpranked.PlayerEntityMaceInterface;
 import com.pvpranked.entity.WindChargeEntity;
-import com.pvpranked.entity.WindChargeNoDamageEntitiesExplosionBehavior;
+import com.pvpranked.entity.WindChargeNoDamageEntitiesCancelsFallDamageExplosionBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
@@ -13,7 +12,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.explosion.Explosion;
 import net.minecraft.world.explosion.ExplosionBehavior;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,9 +21,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import static com.pvpranked.FaithfulMace.MOGGER;
 import static com.pvpranked.FaithfulMace.superfluousLogging;
 
-@Debug(export = true)
 @Mixin(Explosion.class)
-public abstract class ExplosionLoggingMixin implements PlayerEntityMaceInterface {
+public abstract class ExplosionLoggingMixin {
 
 	@Shadow @Final private double x;
 
@@ -72,12 +69,12 @@ public abstract class ExplosionLoggingMixin implements PlayerEntityMaceInterface
 	private double lookingForAC(double ac, @Local Entity entity) {
         if(entity instanceof ServerPlayerEntity && superfluousLogging()) MOGGER.error("looking for AC in entity {} with val {}", entity, ac);
 
-		if(this.behavior instanceof WindChargeNoDamageEntitiesExplosionBehavior) {
+		if(this.behavior instanceof WindChargeNoDamageEntitiesCancelsFallDamageExplosionBehavior) {
 			if(entity instanceof WindChargeEntity) {
 				return ac;
 			}
 
-			return ac * ((WindChargeNoDamageEntitiesExplosionBehavior) this.behavior).knockbackMultiplier;
+			return ac * ((WindChargeNoDamageEntitiesCancelsFallDamageExplosionBehavior) this.behavior).knockbackMultiplier;
 		}
 
 		return ac;

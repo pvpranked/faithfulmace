@@ -1,7 +1,6 @@
 package com.pvpranked.mixin.client;
 
 import com.pvpranked.MaceClientUtil;
-import com.pvpranked.PlayerEntityMaceInterface;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +15,7 @@ import static com.pvpranked.FaithfulMace.MACE_SMASH_WORLD_EVENT_ID;
 import static com.pvpranked.FaithfulMace.MOGGER;
 
 @Mixin(WorldRenderer.class)
-public abstract class MaceSmashWorldEventMixin implements PlayerEntityMaceInterface {
+public abstract class MaceSmashWorldEventMixin {
 
 	@Shadow private @Nullable ClientWorld world;
 
