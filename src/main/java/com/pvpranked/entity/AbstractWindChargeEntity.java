@@ -4,7 +4,6 @@ package com.pvpranked.entity;
 import com.pvpranked.FaithfulMace;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -28,10 +27,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractWindChargeEntity extends ExplosiveProjectileEntity implements FlyingItemEntity {
-    public static final List<Block> WIND_CHARGE_CANNOT_COLLIDE_WITH = new ArrayList<>();
-    static {
-        WIND_CHARGE_CANNOT_COLLIDE_WITH.add(Blocks.BARRIER);
-    }
+
+    /**
+     * This utility list is here for use by the PVP Ranked mod, because in PVP Ranked matches wind charges disappear on contact with barriers.
+     * <p>
+     * if you wish to add/remove blocks to this list or add additional conditions, feel free to add stuff to this list in your mods .onInitialize() function. Example summarized from the PVP Ranked source code:
+     *
+     *
+     *
+
+     <pre>{@code
+     * public class PVPRanked implements ModInitializer {
+     *     @Override
+     *     public void onInitialize() {
+     *         AbstractWindChargeEntity.WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH.add(Blocks.BARRIER);
+     *     }
+     * }
+     * </pre>
+     */
+
+    public static final List<Block> WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH = new ArrayList<>();
 
     public AbstractWindChargeEntity(EntityType<? extends AbstractWindChargeEntity> entityType, World world) {
         super(entityType, world);
@@ -104,9 +119,9 @@ public abstract class AbstractWindChargeEntity extends ExplosiveProjectileEntity
 
     protected abstract void createExplosion(Vec3d pos);
 
-    /** if you wish to add/remove blocks to this list or add additional conditions, either add/remove blocks to WIND_CHARGE_CANNOT_COLLIDE_WITH when your mod initializes or use @WrapOperation on this method to ensure compatibility. The list is final, but if you really want to empty it you can always call WIND_CHARGE_CANNOT_COLLIDE_WITH.clear(); */
-    protected boolean canCollideWithBlock(BlockState blockState) {
-        return !WIND_CHARGE_CANNOT_COLLIDE_WITH.contains(blockState.getBlock());
+    /** details on this in the javadoc for WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH */
+    protected boolean despawnOnContactWith(BlockState blockState) {
+        return WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH.contains(blockState.getBlock());
     }
 
     @Override
@@ -114,13 +129,13 @@ public abstract class AbstractWindChargeEntity extends ExplosiveProjectileEntity
         super.onBlockHit(blockHitResult);
         if (!this.getWorld().isClient) {
             BlockState blockState = this.getWorld().getBlockState(blockHitResult.getBlockPos());
-            if(canCollideWithBlock(blockState)) {
+            if(!despawnOnContactWith(blockState)) {
                 Vec3i vec3i = blockHitResult.getSide().getVector();
                 Vec3d vec3d = Vec3d.of(vec3i).multiply(0.25, 0.25, 0.25);
                 Vec3d vec3d2 = blockHitResult.getPos().add(vec3d);
                 this.createExplosion(vec3d2);
                 this.discard();
-            }
+            } //else .discard() is handled by AbstractWindChargeEntity#onCollision, so it will just disappear
         }
     }
 
