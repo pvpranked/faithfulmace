@@ -1,6 +1,5 @@
 package com.pvpranked.enchantments;
 
-import com.pvpranked.item.MaceItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -10,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import org.apache.commons.lang3.mutable.MutableFloat;
 
-public class DensityEnchantment extends Enchantment {
+public class DensityEnchantment extends MaceEnchantment {
 
     protected DensityEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
@@ -19,11 +18,6 @@ public class DensityEnchantment extends Enchantment {
     @Override
     public void modifySmashDamagePerFallenBlock(ServerWorld world, int level, ItemStack stack, Entity user, DamageSource damageSource, MutableFloat smashDamagePerFallenBlock) {
         smashDamagePerFallenBlock.add(0.5 * level);
-    }
-
-    @Override
-    public boolean isAcceptableItem(ItemStack stack) {
-        return stack.getItem() instanceof MaceItem;
     }
 
     @Override

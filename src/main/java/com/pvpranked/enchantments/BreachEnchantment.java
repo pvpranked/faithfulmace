@@ -1,6 +1,5 @@
 package com.pvpranked.enchantments;
 
-import com.pvpranked.item.MaceItem;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -13,7 +12,7 @@ import org.apache.commons.lang3.mutable.MutableFloat;
 import static com.pvpranked.FaithfulMace.MOGGER;
 import static com.pvpranked.FaithfulMace.superfluousLogging;
 
-public class BreachEnchantment extends Enchantment {
+public class BreachEnchantment extends MaceEnchantment {
 
     protected BreachEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
@@ -25,11 +24,6 @@ public class BreachEnchantment extends Enchantment {
 
         if(superfluousLogging()) MOGGER.info("modifying {}", -0.15 * level);
         armorEffectiveness.add(-0.15 * level);
-    }
-
-    @Override
-    public boolean isAcceptableItem(ItemStack stack) {
-        return stack.getItem() instanceof MaceItem;
     }
 
     @Override

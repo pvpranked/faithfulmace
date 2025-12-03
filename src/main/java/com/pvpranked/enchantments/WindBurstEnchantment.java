@@ -2,15 +2,12 @@ package com.pvpranked.enchantments;
 
 import com.pvpranked.ExplosionUtil;
 import com.pvpranked.FaithfulMace;
-import com.pvpranked.entity.WindChargeNoDamageEntitiesExplosionBehavior;
-import com.pvpranked.item.MaceItem;
-import net.minecraft.enchantment.Enchantment;
+import com.pvpranked.entity.WindChargeNoDamageEntitiesCancelsFallDamageExplosionBehavior;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -19,7 +16,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class WindBurstEnchantment extends Enchantment {
+public class WindBurstEnchantment extends MaceEnchantment {
 
     protected WindBurstEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[] {EquipmentSlot.MAINHAND});
@@ -69,7 +66,7 @@ public class WindBurstEnchantment extends Enchantment {
 
                 attributeToUser ? user : null,
                 damageSource,
-                new WindChargeNoDamageEntitiesExplosionBehavior(knockbackMultiplier),
+                new WindChargeNoDamageEntitiesCancelsFallDamageExplosionBehavior(knockbackMultiplier),
                 vec3d.getX(),
                 vec3d.getY(),
                 vec3d.getZ(),
@@ -80,11 +77,6 @@ public class WindBurstEnchantment extends Enchantment {
                 largeParticle,
                 sound
         );
-    }
-
-    @Override
-    public boolean isAcceptableItem(ItemStack stack) {
-        return stack.getItem() instanceof MaceItem;
     }
 
     @Override
