@@ -2,7 +2,6 @@ package com.pvpranked.entity;
 
 
 import com.pvpranked.FaithfulMace;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -23,30 +22,11 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.BiPredicate;
+
+import static com.pvpranked.FaithfulMace.ALL_CONDITIONS_THAT_CAN_MAKE_WIND_CHARGE_DESPAWN_ON_BLOCK_IMPACT;
 
 public abstract class AbstractWindChargeEntity extends ExplosiveProjectileEntity implements FlyingItemEntity {
-
-    /**
-     * This utility list is here for use by the PVP Ranked mod, because in PVP Ranked matches wind charges disappear on contact with barriers.
-     * <p>
-     * if you wish to add/remove blocks to this list or add additional conditions, feel free to add stuff to this list in your mods .onInitialize() function. Example summarized from the PVP Ranked source code:
-     *
-     *
-     *
-
-     <pre>{@code
-     * public class PVPRanked implements ModInitializer {
-     *     @Override
-     *     public void onInitialize() {
-     *         AbstractWindChargeEntity.WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH.add(Blocks.BARRIER);
-     *     }
-     * }
-     * </pre>
-     */
-
-    public static final List<Block> WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH = new ArrayList<>();
 
     public AbstractWindChargeEntity(EntityType<? extends AbstractWindChargeEntity> entityType, World world) {
         super(entityType, world);
@@ -120,8 +100,13 @@ public abstract class AbstractWindChargeEntity extends ExplosiveProjectileEntity
     protected abstract void createExplosion(Vec3d pos);
 
     /** details on this in the javadoc for WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH */
-    protected boolean despawnOnContactWith(BlockState blockState) {
-        return WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH.contains(blockState.getBlock());
+    protected boolean despawnOnContactWith(AbstractWindChargeEntity windChargeEntity, BlockState blockState) {
+        for (BiPredicate<AbstractWindChargeEntity, BlockState> shouldDespawnChecker : ALL_CONDITIONS_THAT_CAN_MAKE_WIND_CHARGE_DESPAWN_ON_BLOCK_IMPACT) {
+            if (shouldDespawnChecker.test(windChargeEntity, blockState)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -129,7 +114,7 @@ public abstract class AbstractWindChargeEntity extends ExplosiveProjectileEntity
         super.onBlockHit(blockHitResult);
         if (!this.getWorld().isClient) {
             BlockState blockState = this.getWorld().getBlockState(blockHitResult.getBlockPos());
-            if(!despawnOnContactWith(blockState)) {
+            if(!despawnOnContactWith(this, blockState)) {
                 Vec3i vec3i = blockHitResult.getSide().getVector();
                 Vec3d vec3d = Vec3d.of(vec3i).multiply(0.25, 0.25, 0.25);
                 Vec3d vec3d2 = blockHitResult.getPos().add(vec3d);

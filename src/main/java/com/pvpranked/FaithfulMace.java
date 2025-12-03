@@ -1,10 +1,12 @@
 package com.pvpranked;
 
 import com.pvpranked.enchantments.MaceEnchants;
+import com.pvpranked.entity.AbstractWindChargeEntity;
 import com.pvpranked.entity.ModEntities;
 import com.pvpranked.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.block.BlockState;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
 import net.minecraft.data.client.TextureKey;
@@ -24,7 +26,32 @@ import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiPredicate;
+
 public class FaithfulMace implements ModInitializer {
+
+    /**
+     * This utility list is here for use by the PVP Ranked mod, because in PVP Ranked matches wind charges disappear on contact with barriers.
+     * <p>
+     * if you wish to add/remove blocks to this list or add additional conditions, feel free to add stuff to this list in your mods .onInitialize() function. Example summarized from the PVP Ranked source code:
+     *
+     *
+     *
+
+     <pre>{@code
+     * public class PVPRanked implements ModInitializer {
+     *     @Override
+     *     public void onInitialize() {
+     *         AbstractWindChargeEntity.WIND_CHARGE_DESPAWNS_ON_CONTACT_WITH.add(Blocks.BARRIER);
+     *     }
+     * }
+     * </pre>
+     */
+
+    public static final List<BiPredicate<AbstractWindChargeEntity, BlockState>> ALL_CONDITIONS_THAT_CAN_MAKE_WIND_CHARGE_DESPAWN_ON_BLOCK_IMPACT = new ArrayList<>();
+
 	public static final String MODID = "faithfulmace";
 
 	// This mogger is used to write text to the console and the log file.
@@ -33,6 +60,7 @@ public class FaithfulMace implements ModInitializer {
 	public static final Logger MOGGER = LoggerFactory.getLogger(MODID);
 
 	public static final RegistryKey<DamageType> MACE_SMASH = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(MODID, "mace_smash"));
+    /** This was in the later version so I backported it. Wind charges don't do damage, though. So this is unused for now lol */
 	public static final RegistryKey<DamageType> WIND_CHARGE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, new Identifier(MODID, "wind_charge"));
 
 	public static final Identifier ITEM_MACE_SMASH_AIR = Identifier.of(MODID, "item.mace.smash_air");
