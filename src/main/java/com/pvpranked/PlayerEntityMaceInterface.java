@@ -56,6 +56,6 @@ public interface PlayerEntityMaceInterface {
     }
 
     static RuntimeException getUnimplementedInterfaceError() {
-        return new RuntimeException("Default method for PlayerEntityMaceInterface should never run");
+        return new UnsupportedOperationException("Default method for PlayerEntityMaceInterface from the mod FaithfulMace should never run");
     }
 }
